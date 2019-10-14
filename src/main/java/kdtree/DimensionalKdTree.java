@@ -1,9 +1,15 @@
 package kdtree;
 
+import kdtree.iterator.BreadthFirstKdTreeIterator;
+import kdtree.iterator.DepthFirstKdTreeIterator;
+import kdtree.iterator.TreeIteratorType;
+
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-public class DimensionalKdTree<T extends Spatial> implements KdTree<T> {
+public class DimensionalKdTree<T extends Spatial> implements KdTree<T>
+ {
     private KdNode<T> root;
     private int size = 0;
 
@@ -184,7 +190,43 @@ public class DimensionalKdTree<T extends Spatial> implements KdTree<T> {
         return result;
     }
 
-    protected static class KdNode<T> implements KdTreeNode {
+    //Finds the median of data in O(n) time
+    private T quickSelect(List<T> listOfData, int k) {
+        Random r = new Random();
+
+        //Chooses a random number between [0, listOfData.size)
+        int pivot =r.nextInt(listOfData.size());
+
+
+        return null;
+    }
+
+     @Override
+     public Iterator<T> iterator() {
+         return new BreadthFirstKdTreeIterator<>(this.root);
+     }
+
+     public Iterator<T> iterator(TreeIteratorType type) {
+        if (type == TreeIteratorType.BREADTH_FIRST) {
+            return new BreadthFirstKdTreeIterator<>(this.root);
+        } else if (type == TreeIteratorType.DEPTH_FIRST) {
+            return new DepthFirstKdTreeIterator<>(this.root);
+        }
+
+        throw new IllegalArgumentException("TreeIteratorType : " + type + "not found.");
+     }
+
+
+     @Override
+     public void forEach(Consumer<? super T> action) {
+        Iterator<T> iterator = this.iterator();
+
+        while (iterator.hasNext()) {
+            action.accept(iterator.next());
+        }
+     }
+
+     protected static class KdNode<T> implements KdTreeNode {
 
 
         private T data;

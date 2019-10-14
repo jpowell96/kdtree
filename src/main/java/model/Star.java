@@ -41,7 +41,7 @@ public class Star implements Spatial<Star> {
 
     @Override
     public String toString() {
-        return String.format("Star \n id: %d \n Coordinates: ") + Arrays.toString(this.coordinates);
+        return String.format("Star \n id: %d \n Coordinates: ", this.id) + Arrays.toString(this.coordinates);
 
     }
 
