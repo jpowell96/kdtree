@@ -8,20 +8,42 @@ import java.util.Objects;
 public class Star implements Spatial<Star> {
     int id;
     String name;
-    private int[] coordinates;
+    private double[] coordinates;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCoordinates(double[] coordinates) {
+        this.coordinates = coordinates;
+    }
 
 
-    public Star(String name, int id, int[] coordinates) {
+    public Star(){}
+
+    public Star(String name, int id, double[] coordinates) {
         this.name = name;
         this.id = id;
         this.coordinates = coordinates;
     }
 
-    public Star(int[] coordinates) {
+    public Star(double[] coordinates) {
         this.coordinates = coordinates;
     }
 
-    public int[] getCoordinates() {
+    public double[] getCoordinates() {
         return this.coordinates;
     }
 
